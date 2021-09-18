@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Clock</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            background-color: burlywood;
+            align-items: center;
+        }
+
+        .timer {
+            align-self: flex-start;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="clock-containter"></div>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    </link>
+    <!-- Load our React component. -->
+    <script type="text/babel">
+        class Clock extends React.Component {
+            constructor(props) {
+                super(props)
+                this.state = {
+                    timer: new Date()
+                }
+            }
+            componentDidMount() {
+                this.clockId = setInterval(() => this.changeTime(), 1000);
+            }
+            componentWillMount() {
+                clearInterval(this.clockId)
+            }
+            changeTime = () => {
+                this.setState({
+                    timer: new Date()
+                })
+            }
+            render() {
+                return (
+                    <div className="container">
+                        <div className="timer">
+                            <h1>{this.state.timer.toLocaleTimeString('en-US', { hour12: true })}</h1>
+                        </div>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Clock />, document.getElementById('clock-containter'));
+    </script>
+</body>
+
+</html>
