@@ -14,6 +14,9 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
+## output
+<img width="1113" alt="Screenshot 2022-01-11 at 7 56 01 AM" src="https://user-images.githubusercontent.com/59916631/148870464-9a941132-d042-45b0-966b-4d95dc095771.png">
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
