@@ -1,0 +1,7 @@
+import { fireEvent, render, screen } from '@testing-library/react';
+import App from './App';
+
+test('renders telecom plans', () => { render(<App />); expect(screen.getByText('More signal.')).toBeInTheDocument(); expect(screen.getByText('Everyday')).toBeInTheDocument(); expect(screen.getByText('6 plans')).toBeInTheDocument(); });
+test('adds a plan and opens selection', () => { render(<App />); fireEvent.click(screen.getByRole('button', { name: 'Add Everyday plan' })); fireEvent.click(screen.getByRole('button', { name: /My plans/ })); expect(screen.getAllByText('My plans').length).toBe(2); expect(screen.getAllByText('Everyday').length).toBe(2); expect(screen.getAllByText('$45.00').length).toBe(2); });
+test('filters plans by customer type', () => { render(<App />); fireEvent.click(screen.getByRole('button', { name: 'Business' })); expect(screen.getByText('Small Business')).toBeInTheDocument(); expect(screen.getByText('1 plans')).toBeInTheDocument(); expect(screen.queryByText('Everyday')).not.toBeInTheDocument(); });
+test('opens activation and requires account details', () => { render(<App />); fireEvent.click(screen.getByRole('button', { name: 'Add Everyday plan' })); fireEvent.click(screen.getByRole('button', { name: /My plans/ })); fireEvent.click(screen.getByRole('button', { name: 'Continue to activation' })); expect(screen.getByText('ACTIVATE YOUR SERVICE')).toBeInTheDocument(); expect(screen.getByText('AutoPay enabled')).toBeInTheDocument(); expect(screen.getByRole('textbox', { name: 'Account holder' })).toBeRequired(); });
